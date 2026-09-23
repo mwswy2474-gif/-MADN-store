@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MADN™ | Global Brokerage & Social Commerce</title>
+    <title>MADN™ | Global Store & Brokerage</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
     
     <script>
         tailwind.config = {
@@ -18,15 +18,9 @@
                     colors: {
                         brand: {
                             main: '#0D9488',
-                            accent: '#6366F1',
                             dark: '#0F172A',
-                            neon: '#10B981'
-                        },
-                        binance: '#F0B90B',
-                        wish: '#0052FF',
-                        shein: '#000000',
-                        amazon: '#FF9900',
-                        ali: '#FF4747'
+                            accent: '#6366F1'
+                        }
                     },
                     fontFamily: {
                         cairo: ['Cairo', 'sans-serif'],
@@ -38,199 +32,241 @@
     </script>
     <style>
         body { font-family: 'Cairo', 'Plus Jakarta Sans', sans-serif; }
-        .glass { background: rgba(255, 255, 255, 0.75); backdrop-filter: blur(12px); }
-        .glow-hover:hover { box-shadow: 0 0 25px rgba(13, 148, 136, 0.3); }
-        .custom-scrollbar::-webkit-scrollbar { height: 6px; }
-        .custom-scrollbar::-webkit-scrollbar-thumb { background: #CBD5E1; border-radius: 10px; }
+        .custom-scrollbar::-webkit-scrollbar { height: 6px; width: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #334155; border-radius: 10px; }
     </style>
 </head>
 <body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col selection:bg-teal-500 selection:text-white">
 
-    <!-- Top Announcement Bar -->
+    <!-- Announcement Bar -->
     <div class="bg-gradient-to-r from-teal-600 via-indigo-600 to-purple-600 text-[11px] font-bold py-1.5 px-4 text-center tracking-wide flex justify-between items-center">
-        <span id="txtTopNotice">✨ منصة الوساطة العالمية الأولى: تحديث تلقائي للمخزون بدعم دفع محلي ورقمي مباشر</span>
-        <div class="flex items-center gap-3">
-            <button onclick="toggleLanguage()" class="bg-white/20 hover:bg-white/30 px-2 py-0.5 rounded-md text-[10px] transition font-mono uppercase">
-                <i class="fa-solid fa-globe ml-1"></i> <span id="langBtnText">EN</span>
-            </button>
-        </div>
+        <span id="txtTopNotice">✨ سوق MADN الشامل: استعراض مئات المنتجات من المتاجر العالمية بأسعار محلية وحجم مخزون مباشر</span>
+        <button onclick="toggleLanguage()" class="bg-white/20 hover:bg-white/30 px-2.5 py-0.5 rounded-md text-[10px] font-mono uppercase transition">
+            <i class="fa-solid fa-globe ml-1"></i> <span id="langBtnText">EN</span>
+        </button>
     </div>
 
-    <!-- Header & Brand Logo -->
+    <!-- Header -->
     <header class="sticky top-0 z-40 bg-slate-900/90 border-b border-slate-800 backdrop-blur-md">
         <div class="max-w-7xl mx-auto px-4 h-20 flex items-center justify-between gap-4">
             
-            <!-- Professional Dynamic Logo -->
-            <a href="#" class="flex items-center gap-3 group">
-                <div class="relative w-11 h-11 bg-gradient-to-tr from-teal-500 via-indigo-500 to-emerald-400 rounded-2xl flex items-center justify-center shadow-lg shadow-teal-500/20 group-hover:scale-105 transition duration-300">
-                    <span class="text-white font-black text-xl tracking-tighter">M</span>
-                    <span class="absolute -bottom-1 -right-1 bg-amber-400 w-3.5 h-3.5 rounded-full border-2 border-slate-900"></span>
+            <!-- Logo -->
+            <a href="#" class="flex items-center gap-3">
+                <div class="w-11 h-11 bg-gradient-to-tr from-teal-500 to-indigo-600 rounded-2xl flex items-center justify-center shadow-lg shadow-teal-500/20">
+                    <span class="text-white font-black text-xl">M</span>
                 </div>
                 <div class="flex flex-col">
-                    <span class="text-xl font-black tracking-wider bg-gradient-to-r from-white via-slate-200 to-teal-400 bg-clip-text text-transparent">MADN<span class="text-teal-400 text-xs align-top">®</span></span>
-                    <span class="text-[9px] font-bold text-slate-400 tracking-widest uppercase -mt-1">Global Market Engine</span>
+                    <span class="text-xl font-black bg-gradient-to-r from-white to-teal-400 bg-clip-text text-transparent">MADN<span class="text-teal-400 text-xs">®</span></span>
+                    <span class="text-[9px] font-bold text-slate-400 uppercase -mt-1">Global Shopping Hub</span>
                 </div>
             </a>
 
             <!-- Search Bar -->
-            <div class="flex-1 max-w-lg hidden md:block">
+            <div class="flex-1 max-w-md hidden md:block">
                 <div class="relative">
-                    <input type="text" id="searchInput" oninput="applyFilters()" placeholder="ابحث عن أي منتج، ماركة، أو رابط من Amazon, Shein..." class="w-full bg-slate-800/80 border border-slate-700/80 rounded-2xl py-2.5 pr-11 pl-4 text-xs text-slate-200 placeholder-slate-400 focus:outline-none focus:border-teal-500 transition">
+                    <input type="text" id="searchInput" oninput="applyFilters()" placeholder="ابحث بين مئات المنتجات المتاحة..." class="w-full bg-slate-800 border border-slate-700 rounded-2xl py-2.5 pr-11 pl-4 text-xs text-slate-200 placeholder-slate-400 focus:outline-none focus:border-teal-500 transition">
                     <i class="fa-solid fa-magnifying-glass absolute right-4 top-3.5 text-slate-400 text-xs"></i>
                 </div>
             </div>
 
-            <!-- Actions -->
-            <div class="flex items-center gap-2 sm:gap-3">
-                <button onclick="fetchLiveItems()" class="bg-teal-500/10 border border-teal-500/30 text-teal-400 hover:bg-teal-500 hover:text-white px-3 py-2 rounded-xl text-xs font-bold transition flex items-center gap-2">
-                    <i class="fa-solid fa-rotate text-xs animate-spin-slow"></i>
-                    <span class="hidden sm:inline" id="btnSync">جلب بضائع جديدة</span>
-                </button>
-
-                <button onclick="openVendorModal()" class="bg-indigo-600 hover:bg-indigo-500 text-white px-3 py-2 rounded-xl text-xs font-bold transition flex items-center gap-1.5 shadow-lg shadow-indigo-600/20">
-                    <i class="fa-solid fa-plus-circle"></i>
-                    <span id="btnAddProduct">إضافة منتج</span>
-                </button>
-
-                <button onclick="toggleCartModal()" class="relative bg-slate-800 hover:bg-slate-700 p-2.5 rounded-xl border border-slate-700 transition">
-                    <i class="fa-solid fa-bag-shopping text-slate-200 text-base"></i>
-                    <span id="cartBadge" class="absolute -top-1 -right-1 bg-teal-500 text-white text-[10px] font-extrabold w-5 h-5 rounded-full flex items-center justify-center hidden">0</span>
-                </button>
-            </div>
+            <!-- Cart Toggle -->
+            <button onclick="toggleCartModal()" class="relative bg-slate-800 hover:bg-slate-700 p-2.5 rounded-xl border border-slate-700 transition flex items-center gap-2">
+                <i class="fa-solid fa-bag-shopping text-teal-400 text-base"></i>
+                <span class="text-xs font-bold text-slate-200 hidden sm:inline">السلة</span>
+                <span id="cartBadge" class="bg-teal-500 text-white text-[10px] font-extrabold px-2 py-0.5 rounded-full hidden">0</span>
+            </button>
         </div>
     </header>
 
-    <!-- Main Content -->
+    <!-- Main Section -->
     <main class="max-w-7xl mx-auto px-4 py-6 flex-1 w-full space-y-6">
 
-        <!-- Store Source Badges Filter -->
-        <div class="flex items-center gap-2 overflow-x-auto pb-2 custom-scrollbar">
-            <button onclick="filterSource('all')" class="source-btn active bg-teal-500 text-white font-bold px-4 py-1.5 rounded-xl text-xs whitespace-nowrap shadow-md">الجميع</button>
-            <button onclick="filterSource('amazon')" class="source-btn bg-slate-800 hover:bg-slate-700 border border-slate-700 text-amber-400 font-bold px-4 py-1.5 rounded-xl text-xs whitespace-nowrap"><i class="fa-brands fa-amazon ml-1"></i> Amazon</button>
-            <button onclick="filterSource('shein')" class="source-btn bg-slate-800 hover:bg-slate-700 border border-slate-700 text-pink-400 font-bold px-4 py-1.5 rounded-xl text-xs whitespace-nowrap"><i class="fa-solid fa-shirt ml-1"></i> Shein</button>
-            <button onclick="filterSource('aliexpress')" class="source-btn bg-slate-800 hover:bg-slate-700 border border-slate-700 text-red-400 font-bold px-4 py-1.5 rounded-xl text-xs whitespace-nowrap"><i class="fa-solid fa-bolt ml-1"></i> AliExpress</button>
+        <!-- Store & Category Filters -->
+        <div class="flex flex-col md:flex-row gap-4 items-start md:items-center justify-between border-b border-slate-800 pb-4">
+            <!-- Source Store Filter -->
+            <div class="flex items-center gap-2 overflow-x-auto w-full md:w-auto custom-scrollbar pb-2 md:pb-0">
+                <button onclick="filterSource('all')" class="src-btn active bg-teal-500 text-white font-bold px-4 py-1.5 rounded-xl text-xs whitespace-nowrap">الجميع</button>
+                <button onclick="filterSource('amazon')" class="src-btn bg-slate-800 border border-slate-700 text-amber-400 font-bold px-4 py-1.5 rounded-xl text-xs whitespace-nowrap"><i class="fa-brands fa-amazon ml-1"></i> Amazon</button>
+                <button onclick="filterSource('shein')" class="src-btn bg-slate-800 border border-slate-700 text-pink-400 font-bold px-4 py-1.5 rounded-xl text-xs whitespace-nowrap"><i class="fa-solid fa-shirt ml-1"></i> Shein</button>
+                <button onclick="filterSource('aliexpress')" class="src-btn bg-slate-800 border border-slate-700 text-red-400 font-bold px-4 py-1.5 rounded-xl text-xs whitespace-nowrap"><i class="fa-solid fa-bolt ml-1"></i> AliExpress</button>
+            </div>
+
+            <!-- Category Filter -->
+            <div class="flex items-center gap-2 overflow-x-auto w-full md:w-auto custom-scrollbar">
+                <select id="categorySelect" onchange="applyFilters()" class="bg-slate-800 border border-slate-700 text-xs text-slate-300 rounded-xl px-3 py-2 focus:outline-none focus:border-teal-500">
+                    <option value="all">جميع الفئات</option>
+                    <option value="electronics">إلكترونيات وساعات</option>
+                    <option value="fashion">أزياء وموضة</option>
+                    <option value="beauty">عناية وتجميل</option>
+                    <option value="home">منزل وديكور</option>
+                </select>
+                <span id="productCounter" class="text-xs text-slate-400 font-mono">عرض: 0 منتج</span>
+            </div>
         </div>
 
         <!-- Products Grid -->
         <div id="productsGrid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-            <!-- Dynamic Injection -->
+            <!-- Dynamic Items Injection -->
         </div>
 
     </main>
 
-    <!-- Modal: Video & Product Detail -->
-    <div id="videoModal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 flex items-center justify-center p-4 hidden">
-        <div class="bg-slate-900 border border-slate-800 rounded-3xl max-w-2xl w-full p-6 relative overflow-hidden shadow-2xl">
-            <button onclick="closeVideoModal()" class="absolute top-4 left-4 text-slate-400 hover:text-white text-2xl font-bold">&times;</button>
-            <div id="videoModalContent"></div>
+    <!-- EXPANDED PRODUCT DETAIL MODAL (النافذة المفتوحة الموسعة للمنتج) -->
+    <div id="productDetailModal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-slate-900 border border-slate-800 rounded-3xl max-w-3xl w-full p-6 relative max-h-[92vh] overflow-y-auto custom-scrollbar">
+            <button onclick="closeProductModal()" class="absolute top-4 left-4 text-slate-400 hover:text-white text-2xl font-bold z-10">&times;</button>
+            
+            <div id="productModalBody" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Media Section (Images + Dedicated Video) -->
+                <div class="space-y-3">
+                    <div class="relative bg-slate-950 rounded-2xl p-4 border border-slate-800 flex items-center justify-center h-64 overflow-hidden">
+                        <img id="modalMainImg" src="" class="max-h-full object-contain">
+                    </div>
+                    
+                    <!-- Thumbnails -->
+                    <div id="modalThumbnails" class="flex gap-2 overflow-x-auto custom-scrollbar pb-1"></div>
+
+                    <!-- Dedicated Product Video Player -->
+                    <div id="modalVideoContainer" class="hidden space-y-1">
+                        <span class="text-[10px] font-bold text-teal-400 uppercase flex items-center gap-1"><i class="fa-solid fa-circle-play"></i> فيديو استعراض المنتج المباشر:</span>
+                        <video id="modalVideoPlayer" controls class="w-full rounded-xl bg-black max-h-48">
+                            <source src="" type="video/mp4">
+                            المتصفح لا يدعم تشغيل الفيديو.
+                        </video>
+                    </div>
+                </div>
+
+                <!-- Product Info & Action Section -->
+                <div class="flex flex-col justify-between space-y-4">
+                    <div class="space-y-3">
+                        <div class="flex items-center gap-2">
+                            <span id="modalSourceBadge" class="text-[10px] font-bold px-2.5 py-0.5 rounded-md border uppercase"></span>
+                            <span id="modalCategoryBadge" class="text-[10px] font-bold bg-slate-800 text-slate-300 px-2.5 py-0.5 rounded-md"></span>
+                        </div>
+                        <h2 id="modalTitle" class="text-base font-extrabold text-white leading-snug"></h2>
+                        
+                        <div class="bg-slate-950 p-3 rounded-2xl border border-slate-800/80 space-y-1">
+                            <div class="flex items-baseline gap-2">
+                                <span id="modalPriceUSD" class="text-xl font-black text-teal-400"></span>
+                                <span class="text-xs text-slate-400">الدولار الأمريكي ($)</span>
+                            </div>
+                            <div id="modalPriceLBP" class="text-xs font-mono text-slate-300"></div>
+                        </div>
+
+                        <p id="modalDesc" class="text-xs text-slate-300 leading-relaxed bg-slate-800/40 p-3 rounded-xl border border-slate-800"></p>
+
+                        <div class="flex justify-between items-center text-xs text-slate-400 pt-1">
+                            <span>الكمية المتوفرة لدى التاجر: <b id="modalStock" class="text-amber-400 font-bold"></b></span>
+                            <span>التقييم: <b id="modalRating" class="text-amber-400"></b> ★</span>
+                        </div>
+                    </div>
+
+                    <div class="space-y-2 pt-2 border-t border-slate-800">
+                        <button id="modalAddBtn" onclick="" class="w-full bg-gradient-to-r from-teal-500 to-indigo-600 hover:from-teal-600 hover:to-indigo-700 text-white font-bold py-3 rounded-xl text-xs shadow-lg transition flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-cart-plus"></i> إضافة إلى سلة الشراء
+                        </button>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
-    <!-- Modal: Cart & Multi-Currency Checkout -->
+    <!-- CART & CHECKOUT MODAL -->
     <div id="cartModal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 flex items-center justify-center p-4 hidden">
-        <div class="bg-slate-900 border border-slate-800 rounded-3xl max-w-lg w-full p-6 relative max-h-[90vh] overflow-y-auto">
+        <div class="bg-slate-900 border border-slate-800 rounded-3xl max-w-md w-full p-6 relative max-h-[90vh] overflow-y-auto custom-scrollbar">
             <div class="flex justify-between items-center pb-4 border-b border-slate-800">
-                <h3 class="font-extrabold text-base text-white flex items-center gap-2"><i class="fa-solid fa-cart-shopping text-teal-400"></i> إتمام الطلب الشامل</h3>
+                <h3 class="font-extrabold text-sm text-white flex items-center gap-2"><i class="fa-solid fa-bag-shopping text-teal-400"></i> سلة طلبات الوساطة</h3>
                 <button onclick="toggleCartModal()" class="text-slate-400 hover:text-white text-xl">&times;</button>
             </div>
 
             <div id="cartItemsContainer" class="py-4 space-y-3"></div>
 
-            <div id="checkoutForm" class="hidden border-t border-slate-800 pt-4">
-                <p class="text-xs font-bold text-slate-300 mb-3">طريقة الدفع المتاحة للوسيط:</p>
-                <div class="grid grid-cols-2 gap-3 mb-4">
-                    <button type="button" onclick="selectPayment('wish')" id="btnWish" class="border border-slate-700 rounded-2xl p-3 flex flex-col items-center gap-1 hover:border-blue-500 transition">
-                        <span class="font-extrabold text-blue-400 text-xs">Wish Money</span>
-                        <span class="text-[10px] text-slate-400">تحويل محلي مباشر</span>
-                    </button>
-                    <button type="button" onclick="selectPayment('binance')" id="btnBinance" class="border border-slate-700 rounded-2xl p-3 flex flex-col items-center gap-1 hover:border-amber-400 transition">
-                        <span class="font-extrabold text-amber-400 text-xs">Binance Pay</span>
-                        <span class="text-[10px] text-slate-400">USDT دفع عالمي</span>
-                    </button>
+            <div id="checkoutArea" class="hidden border-t border-slate-800 pt-4 space-y-3">
+                <div class="flex justify-between items-center font-extrabold text-sm">
+                    <span>الإجمالي التقديري:</span>
+                    <span id="cartTotalUSD" class="text-teal-400"></span>
                 </div>
-
-                <div id="paymentDetails" class="bg-slate-800/50 border border-slate-700/50 rounded-2xl p-4 mb-4 text-xs space-y-2 hidden">
-                    <div id="wishDetails" class="hidden">
-                        <p class="font-bold text-slate-200">الدفع عبر Wish Money:</p>
-                        <div class="bg-slate-900 p-2.5 rounded-xl border border-slate-700 flex justify-between items-center my-2 font-mono">
-                            <span class="text-teal-400 font-bold">+961 81 322 059</span>
-                            <button onclick="copyWish()" class="text-xs text-indigo-400 hover:underline"><i class="fa-regular fa-copy"></i> نسخ</button>
-                        </div>
-                    </div>
-                    <div id="binanceDetails" class="hidden text-center">
-                        <p class="font-bold text-slate-200 mb-2">امسح الكود عبر تطبيق Binance:</p>
-                        <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=binancePay_MADN_Platform" class="w-32 h-32 mx-auto rounded-xl border border-slate-700 p-1 bg-white">
-                    </div>
-                    <input type="text" id="txRef" placeholder="رقم المرجع الإشعار / TxID *" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-2.5 text-xs text-white">
-                </div>
-
-                <div class="space-y-2">
-                    <input type="text" id="custName" placeholder="الاسم الكامل *" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-2.5 text-xs text-white">
-                    <input type="tel" id="custPhone" placeholder="رقم واتساب للتواصل والطلب *" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-2.5 text-xs text-white">
-                    <input type="text" id="custAddress" placeholder="العنوان بالتفصيل استلام الشحنة *" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-2.5 text-xs text-white">
-                </div>
-
-                <div class="flex justify-between items-center font-extrabold text-sm border-t border-slate-800 pt-3 mt-4">
-                    <span>الإجمالي:</span>
-                    <span id="cartTotal" class="text-teal-400">$0.00</span>
-                </div>
-
-                <button onclick="submitOrder()" class="w-full mt-4 bg-gradient-to-r from-teal-500 to-indigo-600 hover:from-teal-600 hover:to-indigo-700 text-white font-bold py-3 rounded-xl shadow-lg transition text-xs">
-                    تأكيد طلب الشراء والوساطة
+                <button onclick="confirmOrderWhatsApp()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3 rounded-xl text-xs transition flex items-center justify-center gap-2 shadow-lg shadow-emerald-600/20">
+                    <i class="fa-brands fa-whatsapp text-base"></i> تأكيد وإرسال الطلب عبر الواتساب
                 </button>
             </div>
         </div>
     </div>
 
-    <!-- JS Logic -->
+    <!-- JS Engine -->
     <script>
-        let currentLang = 'ar';
-        const exchangeRateLBP = 89500; // Local currency converter standard rate
+        const rateLBP = 89500;
+        let selectedSource = 'all';
+        let cart = [];
 
-        let products = [
-            { id: 1, title: 'ساعة ذكية AMOLED Ultra 8 Pro', priceUSD: 38.00, source: 'amazon', stock: 12, rating: 4.9, img: 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=500', videoUrl: 'https://www.w3schools.com/html/mov_bbb.mp4', desc: 'مقاومة للماء، تدعم المكالمات، شاشة عالية الدقة، وتتبع اللياقة بدقة.' },
-            { id: 2, title: 'جاكيت أسود عصري بأسلوب الشارع (Streetwear)', priceUSD: 45.00, source: 'shein', stock: 5, rating: 4.8, img: 'https://images.unsplash.com/photo-1551028719-00167b16eac5?w=500', videoUrl: 'https://www.w3schools.com/html/mov_bbb.mp4', desc: 'تصميم عصري من علامات Shein الفاخرة وخامة عالية الجودة.' },
-            { id: 3, title: 'سماعة لاسلكية HiFi مع إلغاء الضوضاء', priceUSD: 22.50, source: 'aliexpress', stock: 3, rating: 4.7, img: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500', videoUrl: 'https://www.w3schools.com/html/mov_bbb.mp4', desc: 'صوت محيطي نقي مع بطارية تدوم أكثر من 30 ساعة متواصلة.' },
-            { id: 4, title: 'نظارة شمسية فاخرة UV400 Protection', priceUSD: 18.00, source: 'amazon', stock: 20, rating: 4.6, img: 'https://images.unsplash.com/photo-1511499767150-a48a237f0083?w=500', videoUrl: '', desc: 'حماية كاملة من أشعة الشمس مع تصميم معدني جذاب خفيف الوزن.' }
+        // توليد قائمة منتجات موسعة من مختلف الفئات والمتاجر العالمية
+        const baseProducts = [
+            // الإلكترونيات والساعات
+            { id: 1, title: 'ساعة ذكية AMOLED Ultra 8 Pro بلون أسود رياضي', priceUSD: 38.00, source: 'amazon', category: 'electronics', stock: 18, rating: 4.9, images: ['https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=600', 'https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?w=600'], video: 'https://www.w3schools.com/html/mov_bbb.mp4', desc: 'ساعة ذكية متوافقة مع جميع الهواتف الذكية، تدعم المكالمات المباشرة ومراقبة معدل نبضات القلب والأنشطة الرياضية.' },
+            { id: 2, title: 'سماعات رأس لاسلكية HiFi مع تقنية إلغاء الضوضاء', priceUSD: 49.99, source: 'aliexpress', category: 'electronics', stock: 25, rating: 4.8, images: ['https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=600', 'https://images.unsplash.com/photo-1484704849700-f032a568e944?w=600'], video: 'https://www.w3schools.com/html/mov_bbb.mp4', desc: 'تجربة صوتية فائقة الوضوح مع ميكروفون مدمج وبطارية تدوم حتى 35 ساعة عمل متواصلة.' },
+            { id: 3, title: 'كاميرا مراقبة ذكية Wi-Fi مع رؤية ليلية بدقة 4K', priceUSD: 29.50, source: 'amazon', category: 'electronics', stock: 10, rating: 4.7, images: ['https://images.unsplash.com/photo-1557324232-b8917d3c3dcb?w=600'], video: '', desc: 'كاميرا مراقبة منزلية متصلة بالتطبيق المباشر على الهاتف مع استشعار للحركة وتنبيهات فورية.' },
+            
+            // الأزياء والموضة
+            { id: 4, title: 'جاكيت أنيق بأسلوب العصري الشارع (Streetwear Jacket)', priceUSD: 42.00, source: 'shein', category: 'fashion', stock: 14, rating: 4.8, images: ['https://images.unsplash.com/photo-1551028719-00167b16eac5?w=600', 'https://images.unsplash.com/photo-1544441893-675973e31985?w=600'], video: 'https://www.w3schools.com/html/mov_bbb.mp4', desc: 'تصميم عصري مميز خفيف الوزن ومناسب لجميع المواسم، بخامة متينة ومقاومة للماء.' },
+            { id: 5, title: 'حذاء رياضي أنيق وخفيف مخصص للجري اليومي', priceUSD: 35.00, source: 'shein', category: 'fashion', stock: 8, rating: 4.6, images: ['https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600'], video: '', desc: 'حذاء رياضي مريح جداً للقدمين، مزود بنعل ممتص للصدمات وتهوية كاملة.' },
+            { id: 6, title: 'نظارات شمسية فاخرة بتصميم كلاسيكي بحماية UV400', priceUSD: 16.00, source: 'aliexpress', category: 'fashion', stock: 30, rating: 4.9, images: ['https://images.unsplash.com/photo-1511499767150-a48a237f0083?w=600'], video: '', desc: 'نظارات شمسية مصنوعة من الهيكل المعدني المقاوم للصدمات مع عدسات قطبية لحماية العينين.' },
+
+            // العناية والتجميل
+            { id: 7, title: 'مجموعة العناية الكاملة بالبشرة والترطيب اليومي', priceUSD: 27.00, source: 'amazon', category: 'beauty', stock: 12, rating: 4.9, images: ['https://images.unsplash.com/photo-1556228720-195a672e8a03?w=600'], video: 'https://www.w3schools.com/html/mov_bbb.mp4', desc: 'مجموعة من أفضل المستحضرات الطبيعية الخالية من المواد الكيميائية الضارة لتغذية البشرة.' },
+            { id: 8, title: 'مجفف ومصفف الشعر الاحترافي بقوة 2000 واط', priceUSD: 31.00, source: 'shein', category: 'beauty', stock: 9, rating: 4.7, images: ['https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=600'], video: '', desc: 'جهاز تصفيف الشعر متعدد السرعات والحرارة للحصول على تسريحة احترافية خلال دقائق.' },
+
+            // المنزل والديكور
+            { id: 9, title: 'مصباح مكتب ذكي LED مع قاعدة شحن لاسلكي للهاتف', priceUSD: 24.00, source: 'aliexpress', category: 'home', stock: 15, rating: 4.8, images: ['https://images.unsplash.com/photo-1507473885765-e6ed057f782c?w=600'], video: '', desc: 'إضاءة مريحة للعين مع عدة درجات سطوع، بالإضافة لقاعدة شحن سريع لجميع الهواتف الذكية.' },
+            { id: 10, title: 'موزع عطور وطارح للرطوبة بالترددات الصوتية مع إضاءة RGB', priceUSD: 19.50, source: 'amazon', category: 'home', stock: 20, rating: 4.8, images: ['https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?w=600'], video: 'https://www.w3schools.com/html/mov_bbb.mp4', desc: 'جهاز تعطير جو هادئ يعمل بمنفذ USB مع ألوان إضاءة متغيرة تعطي طابعاً مهدئاً للمكان.' }
         ];
 
-        let cart = [];
-        let currentSourceFilter = 'all';
+        // مضاعفة المنتجات لتكوين قائمة ضخمة
+        let allProducts = [];
+        for (let i = 0; i < 10; i++) {
+            baseProducts.forEach(item => {
+                let newItem = {...item};
+                newItem.id = allProducts.length + 1;
+                if(i > 0) newItem.title += ` (اصدار خاص #${i+1})`;
+                allProducts.push(newItem);
+            });
+        }
 
-        function renderProducts() {
+        function renderProductsGrid(list) {
             const grid = document.getElementById('productsGrid');
-            if(!grid) return;
+            const counter = document.getElementById('productCounter');
             grid.innerHTML = '';
+            counter.innerText = `عرض: ${list.length} منتج`;
 
-            let list = products.filter(p => currentSourceFilter === 'all' || p.source === currentSourceFilter);
+            if(list.length === 0) {
+                grid.innerHTML = `<div class="col-span-full text-center py-12 text-slate-500 text-xs">لا توجد منتجات تطابق البحث أو الفلتر المختار.</div>`;
+                return;
+            }
 
             list.forEach(p => {
-                const localPrice = (p.priceUSD * exchangeRateLBP).toLocaleString();
-                const sourceBadge = p.source === 'amazon' ? 'bg-amber-500/20 text-amber-400 border-amber-500/30' : (p.source === 'shein' ? 'bg-pink-500/20 text-pink-400 border-pink-500/30' : 'bg-red-500/20 text-red-400 border-red-500/30');
+                const localPrice = (p.priceUSD * rateLBP).toLocaleString();
+                const badgeColor = p.source === 'amazon' ? 'bg-amber-500/20 text-amber-400 border-amber-500/30' : (p.source === 'shein' ? 'bg-pink-500/20 text-pink-400 border-pink-500/30' : 'bg-red-500/20 text-red-400 border-red-500/30');
 
                 grid.innerHTML += `
-                    <div class="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden hover:border-slate-700 transition flex flex-col justify-between group">
+                    <div onclick="openProductModal(${p.id})" class="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden hover:border-slate-700 transition cursor-pointer flex flex-col justify-between group">
                         <div>
-                            <div class="relative h-44 bg-slate-950 p-3 flex items-center justify-center overflow-hidden">
-                                <img src="${p.img}" class="max-h-full object-contain group-hover:scale-105 transition duration-500">
-                                <span class="absolute top-2 right-2 text-[9px] font-bold px-2 py-0.5 rounded-md border backdrop-blur-md uppercase ${sourceBadge}">${p.source}</span>
-                                ${p.videoUrl ? `<button onclick="openVideoModal(${p.id})" class="absolute bottom-2 left-2 bg-slate-900/80 text-white p-2 rounded-xl text-xs hover:bg-teal-500 transition"><i class="fa-solid fa-circle-play"></i> فيديو</button>` : ''}
+                            <div class="relative h-40 bg-slate-950 p-3 flex items-center justify-center overflow-hidden">
+                                <img src="${p.images[0]}" class="max-h-full object-contain group-hover:scale-105 transition duration-300">
+                                <span class="absolute top-2 right-2 text-[9px] font-bold px-2 py-0.5 rounded-md border uppercase backdrop-blur-md ${badgeColor}">${p.source}</span>
+                                ${p.video ? `<span class="absolute bottom-2 left-2 bg-slate-900/80 text-teal-400 px-2 py-0.5 rounded-md text-[9px] font-bold"><i class="fa-solid fa-video"></i> فيديو</span>` : ''}
                             </div>
                             <div class="p-3">
                                 <h3 class="text-xs font-bold text-slate-200 line-clamp-2 mb-2 group-hover:text-teal-400 transition">${p.title}</h3>
-                                <div class="space-y-0.5 mb-2">
-                                    <div class="text-sm font-black text-teal-400">$${p.priceUSD.toFixed(2)}</div>
-                                    <div class="text-[10px] font-mono text-slate-400">≈ ${localPrice} LBP</div>
-                                </div>
-                                <div class="flex items-center justify-between text-[10px] text-slate-400 border-t border-slate-800/80 pt-2">
-                                    <span>المتبقي: <b class="text-amber-400">${p.stock} قطعة</b></span>
+                                <div class="text-sm font-black text-teal-400">$${p.priceUSD.toFixed(2)}</div>
+                                <div class="text-[10px] font-mono text-slate-400 mb-2">≈ ${localPrice} LBP</div>
+                                <div class="flex justify-between items-center text-[10px] text-slate-400 border-t border-slate-800/80 pt-2">
+                                    <span>المتبقي: <b class="text-amber-400">${p.stock}</b></span>
                                     <span>★ ${p.rating}</span>
                                 </div>
                             </div>
                         </div>
                         <div class="p-3 pt-0">
-                            <button onclick="addToCart(${p.id})" class="w-full bg-slate-800 hover:bg-teal-600 text-slate-200 hover:text-white font-bold py-2 rounded-xl text-xs transition flex items-center justify-center gap-1.5">
-                                <i class="fa-solid fa-cart-plus"></i> طلب عبر الوسيط
+                            <button onclick="event.stopPropagation(); openProductModal(${p.id});" class="w-full bg-slate-800 hover:bg-teal-600 text-slate-200 hover:text-white font-bold py-2 rounded-xl text-xs transition">
+                                <i class="fa-solid fa-expand ml-1"></i> استعراض وتوسيع
                             </button>
                         </div>
                     </div>
@@ -238,38 +274,68 @@
             });
         }
 
-        function openVideoModal(id) {
-            const p = products.find(prod => prod.id === id);
+        // فتح النافذة الموسعة التفصيلية للمنتج (تفاصيل + صور متعددة + فيديو دقيق)
+        function openProductModal(id) {
+            const p = allProducts.find(item => item.id === id);
             if(!p) return;
-            const container = document.getElementById('videoModalContent');
-            container.innerHTML = `
-                <div class="space-y-4">
-                    <h3 class="font-extrabold text-sm text-white">${p.title}</h3>
-                    <video controls autoplay class="w-full rounded-2xl max-h-80 bg-black">
-                        <source src="${p.videoUrl}" type="video/mp4">
-                    </video>
-                    <p class="text-xs text-slate-300 leading-relaxed">${p.desc}</p>
-                    <div class="flex justify-between items-center pt-2">
-                        <span class="text-teal-400 font-extrabold text-lg">$${p.priceUSD.toFixed(2)}</span>
-                        <button onclick="addToCart(${p.id}); closeVideoModal();" class="bg-teal-500 hover:bg-teal-600 text-white font-bold px-4 py-2 rounded-xl text-xs">إضافة للسلة</button>
-                    </div>
-                </div>
-            `;
-            document.getElementById('videoModal').classList.remove('hidden');
+
+            document.getElementById('modalTitle').innerText = p.title;
+            document.getElementById('modalPriceUSD').innerText = `$${p.priceUSD.toFixed(2)}`;
+            document.getElementById('modalPriceLBP').innerText = `السعر المحلي التقريبي: ${(p.priceUSD * rateLBP).toLocaleString()} LBP`;
+            document.getElementById('modalDesc').innerText = p.desc;
+            document.getElementById('modalStock').innerText = `${p.stock} قطعة لدى المصدر`;
+            document.getElementById('modalRating').innerText = p.rating;
+            document.getElementById('modalMainImg').src = p.images[0];
+
+            // Source & Category Badges
+            const sourceBadge = document.getElementById('modalSourceBadge');
+            sourceBadge.innerText = p.source;
+            sourceBadge.className = `text-[10px] font-bold px-2.5 py-0.5 rounded-md border uppercase ${p.source === 'amazon' ? 'bg-amber-500/20 text-amber-400 border-amber-500/30' : (p.source === 'shein' ? 'bg-pink-500/20 text-pink-400 border-pink-500/30' : 'bg-red-500/20 text-red-400 border-red-500/30')}`;
+            document.getElementById('modalCategoryBadge').innerText = p.category;
+
+            // Render Image Thumbnails
+            const thumbs = document.getElementById('modalThumbnails');
+            thumbs.innerHTML = '';
+            p.images.forEach(imgUrl => {
+                thumbs.innerHTML += `<img src="${imgUrl}" onclick="document.getElementById('modalMainImg').src='${imgUrl}'" class="w-12 h-12 object-contain bg-slate-950 rounded-lg border border-slate-700 cursor-pointer hover:border-teal-500 p-1">`;
+            });
+
+            // Dedicated Product Video Player Logic
+            const videoBox = document.getElementById('modalVideoContainer');
+            const videoPlayer = document.getElementById('modalVideoPlayer');
+            if(p.video && p.video !== '') {
+                videoPlayer.src = p.video;
+                videoBox.classList.remove('hidden');
+            } else {
+                videoBox.classList.add('hidden');
+                videoPlayer.src = '';
+            }
+
+            // Set Add To Cart Function
+            document.getElementById('modalAddBtn').onclick = function() {
+                addToCart(p.id);
+                closeProductModal();
+            };
+
+            document.getElementById('productDetailModal').classList.remove('hidden');
         }
 
-        function closeVideoModal() { document.getElementById('videoModal').classList.add('hidden'); }
+        function closeProductModal() {
+            document.getElementById('productDetailModal').classList.add('hidden');
+            const videoPlayer = document.getElementById('modalVideoPlayer');
+            if(videoPlayer) videoPlayer.pause();
+        }
 
         function addToCart(id) {
-            const p = products.find(item => item.id === id);
+            const p = allProducts.find(item => item.id === id);
             if(p && p.stock > 0) {
                 cart.push(p);
                 p.stock--;
                 updateCartBadge();
-                renderProducts();
-                alert('تمت إضافة المنتج بنجاح مع خصم الكمية من المخزون المباشر!');
+                applyFilters();
+                alert('تمت إضافة المنتج إلى سلة الوساطة الخاصة بك بنجاح!');
             } else {
-                alert('عذراً، هذا المنتج نفذت كميته لدى التاجر والمصدر!');
+                alert('عذراً، نَفَذَت كمية هذا المنتج لدى التاجر!');
             }
         }
 
@@ -280,6 +346,31 @@
             else badge.classList.add('hidden');
         }
 
+        function applyFilters() {
+            const query = document.getElementById('searchInput').value.toLowerCase();
+            const category = document.getElementById('categorySelect').value;
+
+            let filtered = allProducts.filter(p => {
+                const matchSource = selectedSource === 'all' || p.source === selectedSource;
+                const matchCategory = category === 'all' || p.category === category;
+                const matchQuery = p.title.toLowerCase().includes(query) || p.desc.toLowerCase().includes(query);
+                return matchSource && matchCategory && matchQuery;
+            });
+
+            renderProductsGrid(filtered);
+        }
+
+        function filterSource(src) {
+            selectedSource = src;
+            document.querySelectorAll('.src-btn').forEach(b => {
+                b.classList.remove('bg-teal-500', 'text-white');
+                b.classList.add('bg-slate-800');
+            });
+            event.target.classList.remove('bg-slate-800');
+            event.target.classList.add('bg-teal-500', 'text-white');
+            applyFilters();
+        }
+
         function toggleCartModal() {
             document.getElementById('cartModal').classList.toggle('hidden');
             renderCartItems();
@@ -287,31 +378,35 @@
 
         function renderCartItems() {
             const container = document.getElementById('cartItemsContainer');
-            const form = document.getElementById('checkoutForm');
+            const checkoutArea = document.getElementById('checkoutArea');
             container.innerHTML = '';
+
             if(cart.length === 0) {
-                container.innerHTML = `<p class="text-center text-slate-500 text-xs py-6">سلة الطلبات فارغة</p>`;
-                form.classList.add('hidden');
+                container.innerHTML = `<p class="text-center text-slate-500 text-xs py-6">سلة الطلبات فارغة حالياً</p>`;
+                checkoutArea.classList.add('hidden');
                 return;
             }
-            form.classList.remove('hidden');
-            let total = 0;
+
+            checkoutArea.classList.remove('hidden');
+            let totalUSD = 0;
+
             cart.forEach((item, index) => {
-                total += item.priceUSD;
+                totalUSD += item.priceUSD;
                 container.innerHTML += `
-                    <div class="flex items-center justify-between bg-slate-800/40 p-2.5 rounded-xl border border-slate-800 text-xs">
+                    <div class="flex items-center justify-between bg-slate-800/50 p-2.5 rounded-xl border border-slate-800 text-xs">
                         <div class="flex items-center gap-2">
-                            <img src="${item.img}" class="w-10 h-10 object-contain rounded-lg bg-slate-900 p-1">
+                            <img src="${item.images[0]}" class="w-10 h-10 object-contain rounded-lg bg-slate-950 p-1">
                             <div>
                                 <p class="font-bold text-slate-200 line-clamp-1">${item.title}</p>
                                 <p class="text-teal-400 font-bold">$${item.priceUSD.toFixed(2)}</p>
                             </div>
                         </div>
-                        <button onclick="removeFromCart(${index})" class="text-red-400 p-1"><i class="fa-solid fa-trash"></i></button>
+                        <button onclick="removeFromCart(${index})" class="text-red-400 hover:text-red-300 p-1"><i class="fa-solid fa-trash"></i></button>
                     </div>
                 `;
             });
-            document.getElementById('cartTotal').innerText = `$${total.toFixed(2)}`;
+
+            document.getElementById('cartTotalUSD').innerText = `$${totalUSD.toFixed(2)} USD (≈ ${(totalUSD * rateLBP).toLocaleString()} LBP)`;
         }
 
         function removeFromCart(i) {
@@ -319,40 +414,39 @@
             cart.splice(i, 1);
             updateCartBadge();
             renderCartItems();
-            renderProducts();
+            applyFilters();
         }
 
-        function filterSource(src) {
-            currentSourceFilter = src;
-            document.querySelectorAll('.source-btn').forEach(b => {
-                b.classList.remove('bg-teal-500', 'text-white');
-                b.classList.add('bg-slate-800', 'text-slate-300');
+        function confirmOrderWhatsApp() {
+            if(cart.length === 0) return;
+            let text = "مرحباً MADN™ Store، أود إتمام طلب الشراء للسلع التالية عبر الوسيط:\n\n";
+            let total = 0;
+            cart.forEach((item, i) => {
+                text += `${i+1}. ${item.title} - $${item.priceUSD.toFixed(2)} (${item.source})\n`;
+                total += item.priceUSD;
             });
-            renderProducts();
+            text += `\nالمجموع الكلي: $${total.toFixed(2)} USD`;
+            
+            const waUrl = `https://wa.me/96181322059?text=${encodeURIComponent(text)}`;
+            window.open(waUrl, '_blank');
         }
 
         function toggleLanguage() {
             const html = document.getElementById('htmlTag');
-            if(currentLang === 'ar') {
-                currentLang = 'en';
+            if(html.getAttribute('dir') === 'rtl') {
                 html.setAttribute('dir', 'ltr');
                 document.getElementById('langBtnText').innerText = 'AR';
-                document.getElementById('txtTopNotice').innerText = '✨ #1 Global Brokerage: Real-time multi-currency & crypto checkout engine.';
+                document.getElementById('txtTopNotice').innerText = '✨ MADN Global Engine: Browse 100+ items with instant stock and local pricing.';
             } else {
-                currentLang = 'ar';
                 html.setAttribute('dir', 'rtl');
                 document.getElementById('langBtnText').innerText = 'EN';
-                document.getElementById('txtTopNotice').innerText = '✨ منصة الوساطة العالمية الأولى: تحديث تلقائي للمخزون بدعم دفع محلي ورقمي مباشر';
+                document.getElementById('txtTopNotice').innerText = '✨ سوق MADN الشامل: استعراض مئات المنتجات من المتاجر العالمية بأسعار محلية وحجم مخزون مباشر';
             }
         }
 
-        function fetchLiveItems() {
-            alert('جاري مزامنة المنتجات والمخزون المباشر من المتاجر العالمية العالمية...');
-            renderProducts();
-        }
-
+        // Initial Execution
         document.addEventListener('DOMContentLoaded', () => {
-            renderProducts();
+            applyFilters();
         });
     </script>
 </body>
