@@ -1,88 +1,438 @@
-‎<!DOCTYPE html>
-‎<html lang="ar" dir="rtl">
-‎<head>
-‎    <meta charset="UTF-8">
-‎    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-‎    <title>MADN | منصة الوساطة التجارية والتسوق</title>
-‎    <!-- Tailwind CSS CDN -->
-‎    <script src="https://cdn.tailwindcss.com"></script>
-‎    <!-- FontAwesome Icons -->
-‎    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-‎    <!-- Google Font: Cairo -->
-‎    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-‎    <script>
-‎        tailwind.config = {
-‎            theme: {
-‎                extend: {
-‎                    colors: {
-‎                        brand: {
-‎                            50: '#f0fdf4',
-‎                            500: '#22c55e',
-‎                            600: '#16a34a',
-‎                            700: '#15803d',
-‎                            dark: '#0f172a'
-‎                        },
-‎                        binance: '#F0B90B',
-‎                        wish: '#0052FF'
-‎                    },
-‎                    fontFamily: {
-‎                        cairo: ['Cairo', 'sans-serif']
-‎                    }
-‎                }
-‎            }
-‎        }
-‎    </script>
-‎    <style>
-‎        body { font-family: 'Cairo', sans-serif; }
-‎        .bg-grid { background-image: radial-gradient(#cbd5e1 1px, transparent 1px); background-size: 20px 20px; }
-‎    </style>
-‎</head>
-‎<body class="bg-slate-50 text-slate-800 flex flex-col min-h-screen">
-‎
-‎    <!-- Header Navigation -->
-‎    <header class="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-slate-200 shadow-sm">
-‎        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-‎            <div class="flex items-center gap-3">
-‎                <div class="bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-extrabold text-2xl px-3 py-1 rounded-xl shadow-md tracking-wider">
-‎                    MADN
-‎                </div>
-‎                <span class="text-xs bg-emerald-100 text-emerald-800 font-semibold px-2 py-0.5 rounded-full hidden sm:inline-block">وسيط تجاري 24/7</span>
-‎            </div>
-‎
-‎            <!-- Global Search -->
-‎            <div class="flex-1 max-w-md mx-4 hidden md:block">
-‎                <div class="relative">
-‎                    <input type="text" id="searchInput" oninput="filterProducts()" placeholder="ابحث عن منتج، ماركة، أو فئة..." class="w-full bg-slate-100 border-0 rounded-full py-2 pr-10 pl-4 text-sm focus:ring-2 focus:ring-emerald-500 focus:bg-white transition-all">
-‎                    <i class="fa-solid fa-search absolute right-3.5 top-2.5 text-slate-400"></i>
-‎                </div>
-‎            </div>
-‎
-‎            <div class="flex items-center gap-3">
-‎                <button onclick="openVendorModal()" class="bg-emerald-50 hover:bg-emerald-100 text-emerald-700 font-bold px-3 py-2 rounded-xl text-xs sm:text-sm flex items-center gap-2 border border-emerald-200 transition">
-‎                    <i class="fa-solid fa-store"></i>
-‎                    <span>اعرض بضاعتك كتاجر</span>
-‎                </button>
-‎                <button onclick="toggleCartModal()" class="relative bg-slate-100 hover:bg-slate-200 p-2.5 rounded-xl text-slate-700 transition">
-‎                    <i class="fa-solid fa-shopping-bag text-lg"></i>
-‎                    <span id="cartBadge" class="absolute -top-1 -right-1 bg-emerald-600 text-white text-[10px] font-bold w-5 h-5 rounded-full flex items-center justify-center hidden">0</span>
-‎                </button>
-‎            </div>
-‎        </div>
-‎    </header>
-‎
-‎    <!-- Mobile Search -->
-‎    <div class="p-3 bg-white border-b border-slate-200 md:hidden">
-‎        <div class="relative">
-‎            <input type="text" id="mobileSearchInput" oninput="filterProductsMobile()" placeholder="ابحث عن منتجات..." class="w-full bg-slate-100 border-0 rounded-xl py-2 pr-10 pl-4 text-sm focus:ring-2 focus:ring-emerald-500">
-‎            <i class="fa-solid fa-search absolute right-3.5 top-2.5 text-slate-400"></i>
-‎        </div>
-‎    </div>
-‎
-‎    <!-- Hero Section -->
-‎    <section class="bg-gradient-to-b from-slate-900 to-slate-800 text-white py-10 px-4 relative overflow-hidden">
-‎        <div class="max-w-7xl mx-auto text-center relative z-10">
-‎            <h1 class="text-3xl sm:text-5xl font-black mb-3">منصة <span class="text-emerald-400">MADN</span> للوساطة التجارية</h1>
-‎            <p class="text-slate-300 text-sm sm:text-base max-w-2xl mx-auto mb-6">نربط بين المشتري والبائع بكل أمان وسهولة. تسوق أحدث المنتجات مع طرق دفع معتمدة ومباشرة (Wish Money & Binance Pay) على مدار الساعة.</p>
-‎            <div class="flex flex-wrap justify-center gap-3">
-‎                <span class="bg-slate-800/80 border border-slate-700 px-3 py-1.5 rounded-lg text-xs flex items-center gap-2"><i class="fa-solid fa-bolt text-yellow-400"></i> دفع فورى ومباشر</span>
-‎        
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MADN | منصة الوساطة التجارية والتسوق</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Font: Cairo -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#f0fdf4',
+                            500: '#22c55e',
+                            600: '#16a34a',
+                            700: '#15803d',
+                            dark: '#0f172a'
+                        },
+                        binance: '#F0B90B',
+                        wish: '#0052FF'
+                    },
+                    fontFamily: {
+                        cairo: ['Cairo', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Cairo', sans-serif; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 flex flex-col min-h-screen">
+
+    <!-- Header Navigation -->
+    <header class="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-slate-200 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-extrabold text-2xl px-3 py-1 rounded-xl shadow-md tracking-wider">
+                    MADN
+                </div>
+                <span class="text-xs bg-emerald-100 text-emerald-800 font-semibold px-2 py-0.5 rounded-full hidden sm:inline-block">وسيط تجاري 24/7</span>
+            </div>
+
+            <!-- Search -->
+            <div class="flex-1 max-w-md mx-4 hidden md:block">
+                <div class="relative">
+                    <input type="text" id="searchInput" oninput="applyFilters()" placeholder="ابحث عن منتج، ماركة، أو فئة..." class="w-full bg-slate-100 border-0 rounded-full py-2 pr-10 pl-4 text-sm focus:ring-2 focus:ring-emerald-500 focus:bg-white transition-all">
+                    <i class="fa-solid fa-search absolute right-3.5 top-2.5 text-slate-400"></i>
+                </div>
+            </div>
+
+            <div class="flex items-center gap-3">
+                <button onclick="openVendorModal()" class="bg-emerald-50 hover:bg-emerald-100 text-emerald-700 font-bold px-3 py-2 rounded-xl text-xs sm:text-sm flex items-center gap-2 border border-emerald-200 transition">
+                    <i class="fa-solid fa-store"></i>
+                    <span>اعرض بضاعتك كتاجر</span>
+                </button>
+                <button onclick="toggleCartModal()" class="relative bg-slate-100 hover:bg-slate-200 p-2.5 rounded-xl text-slate-700 transition">
+                    <i class="fa-solid fa-shopping-bag text-lg"></i>
+                    <span id="cartBadge" class="absolute -top-1 -right-1 bg-emerald-600 text-white text-[10px] font-bold w-5 h-5 rounded-full flex items-center justify-center hidden">0</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Search -->
+    <div class="p-3 bg-white border-b border-slate-200 md:hidden">
+        <div class="relative">
+            <input type="text" id="mobileSearchInput" oninput="applyFilters()" placeholder="ابحث عن منتجات..." class="w-full bg-slate-100 border-0 rounded-xl py-2 pr-10 pl-4 text-sm focus:ring-2 focus:ring-emerald-500">
+            <i class="fa-solid fa-search absolute right-3.5 top-2.5 text-slate-400"></i>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="bg-gradient-to-b from-slate-900 to-slate-800 text-white py-10 px-4 relative overflow-hidden">
+        <div class="max-w-7xl mx-auto text-center relative z-10">
+            <h1 class="text-3xl sm:text-5xl font-black mb-3">منصة <span class="text-emerald-400">MADN</span> للوساطة التجارية</h1>
+            <p class="text-slate-300 text-sm sm:text-base max-w-2xl mx-auto mb-6">نربط بين المشتري والبائع بكل أمان وسهولة. تسوق أحدث المنتجات مع طرق دفع معتمدة ومباشرة (Wish Money & Binance Pay) على مدار الساعة.</p>
+        </div>
+    </section>
+
+    <!-- Categories Filter & Products Main -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-1 w-full">
+        <!-- Categories Bar -->
+        <div class="flex items-center gap-2 overflow-x-auto pb-4 mb-6" id="categoriesContainer">
+            <button onclick="filterCategory(event, 'all')" class="cat-btn active bg-emerald-600 text-white font-bold px-4 py-2 rounded-xl text-sm whitespace-nowrap shadow-sm">الكل</button>
+            <button onclick="filterCategory(event, 'electronics')" class="cat-btn bg-white hover:bg-slate-100 border border-slate-200 text-slate-700 font-bold px-4 py-2 rounded-xl text-sm whitespace-nowrap">إلكترونيات وهواتف</button>
+            <button onclick="filterCategory(event, 'fashion')" class="cat-btn bg-white hover:bg-slate-100 border border-slate-200 text-slate-700 font-bold px-4 py-2 rounded-xl text-sm whitespace-nowrap">أزياء وموضة</button>
+            <button onclick="filterCategory(event, 'perfumes')" class="cat-btn bg-white hover:bg-slate-100 border border-slate-200 text-slate-700 font-bold px-4 py-2 rounded-xl text-sm whitespace-nowrap">عطور وساعات</button>
+            <button onclick="filterCategory(event, 'home')" class="cat-btn bg-white hover:bg-slate-100 border border-slate-200 text-slate-700 font-bold px-4 py-2 rounded-xl text-sm whitespace-nowrap">منزل وديكور</button>
+        </div>
+
+        <!-- Products Grid -->
+        <div id="productsGrid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 sm:gap-6">
+            <!-- Dynamic Injection -->
+        </div>
+    </main>
+
+    <!-- Modal: Modal Add Product (Vendor) -->
+    <div id="vendorModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-white rounded-2xl max-w-lg w-full p-6 shadow-2xl border border-slate-100 max-h-[90vh] overflow-y-auto">
+            <div class="flex justify-between items-center pb-4 border-b">
+                <h3 class="text-lg font-bold text-slate-800"><i class="fa-solid fa-shop text-emerald-600 ml-2"></i>عرض بضاعتك على منصة MADN</h3>
+                <button onclick="closeVendorModal()" class="text-slate-400 hover:text-slate-600 text-xl">&times;</button>
+            </div>
+            <form id="vendorForm" onsubmit="handleVendorSubmit(event)" class="space-y-4 mt-4">
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">اسم التاجر / المتجر *</label>
+                    <input type="text" required id="vStoreName" placeholder="مثال: متجر الأناقة" class="w-full bg-slate-50 border border-slate-200 rounded-xl p-2.5 text-sm focus:ring-2 focus:ring-emerald-500">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">رقم الهاتف / الواتساب للتواصل *</label>
+                    <input type="tel" required id="vPhone" placeholder="+961 XX XXX XXX" class="w-full bg-slate-50 border border-slate-200 rounded-xl p-2.5 text-sm focus:ring-2 focus:ring-emerald-500">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">اسم المنتج *</label>
+                    <input type="text" required id="vTitle" placeholder="مثال: ساعة ذكية مقاومة للماء" class="w-full bg-slate-50 border border-slate-200 rounded-xl p-2.5 text-sm focus:ring-2 focus:ring-emerald-500">
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1">السعر ($) *</label>
+                        <input type="number" step="0.01" required id="vPrice" placeholder="50" class="w-full bg-slate-50 border border-slate-200 rounded-xl p-2.5 text-sm focus:ring-2 focus:ring-emerald-500">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1">الفئة *</label>
+                        <select id="vCategory" class="w-full bg-slate-50 border border-slate-200 rounded-xl p-2.5 text-sm focus:ring-2 focus:ring-emerald-500">
+                            <option value="electronics">إلكترونيات</option>
+                            <option value="fashion">أزياء</option>
+                            <option value="perfumes">عطور وساعات</option>
+                            <option value="home">منزل وديكور</option>
+                        </select>
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">رابط صورة المنتج (Unsplash أو رابط مباشر)</label>
+                    <input type="url" id="vImg" placeholder="https://images.unsplash.com/..." class="w-full bg-slate-50 border border-slate-200 rounded-xl p-2.5 text-sm focus:ring-2 focus:ring-emerald-500">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">وصف المنتج</label>
+                    <textarea id="vDesc" rows="3" placeholder="مواصفات وتفاصيل المنتج..." class="w-full bg-slate-50 border border-slate-200 rounded-xl p-2.5 text-sm focus:ring-2 focus:ring-emerald-500"></textarea>
+                </div>
+                <button type="submit" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 rounded-xl shadow-lg transition">
+                    نشر المنتج فوراً على المنصة
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal: Checkout & Cart -->
+    <div id="cartModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-white rounded-2xl max-w-xl w-full p-6 shadow-2xl border border-slate-100 max-h-[90vh] overflow-y-auto">
+            <div class="flex justify-between items-center pb-4 border-b">
+                <h3 class="text-lg font-bold text-slate-800"><i class="fa-solid fa-shopping-cart text-emerald-600 ml-2"></i>سلة الشراء وإتمام الطلب</h3>
+                <button onclick="toggleCartModal()" class="text-slate-400 hover:text-slate-600 text-xl">&times;</button>
+            </div>
+
+            <div id="cartItemsContainer" class="py-4 space-y-3">
+                <!-- Cart Items -->
+            </div>
+
+            <div id="checkoutForm" class="hidden border-t pt-4 mt-4">
+                <h4 class="font-bold text-sm text-slate-800 mb-3">اختر طريقة الدفع المناسبة:</h4>
+                
+                <div class="grid grid-cols-2 gap-3 mb-4">
+                    <button type="button" onclick="selectPayment('wish')" id="btnWish" class="pay-option border-2 border-slate-200 rounded-xl p-3 flex flex-col items-center gap-1 hover:border-wish transition">
+                        <span class="font-extrabold text-wish text-sm">Wish Money</span>
+                        <span class="text-[10px] text-slate-500">تحويل مباشر (لبنان)</span>
+                    </button>
+                    <button type="button" onclick="selectPayment('binance')" id="btnBinance" class="pay-option border-2 border-slate-200 rounded-xl p-3 flex flex-col items-center gap-1 hover:border-binance transition">
+                        <span class="font-extrabold text-binance text-sm">Binance Pay</span>
+                        <span class="text-[10px] text-slate-500">دفع رقمي عالمي</span>
+                    </button>
+                </div>
+
+                <div id="paymentDetails" class="bg-slate-50 border rounded-xl p-4 mb-4 text-xs space-y-2 hidden">
+                    <div id="wishDetails" class="hidden">
+                        <p class="font-bold text-slate-800">طريقة الدفع عبر Wish Money:</p>
+                        <p class="text-slate-600">يرجى تحويل المبلغ الموضح أدناه إلى حساب Wish التالي:</p>
+                        <div class="bg-white p-2.5 rounded-lg border flex justify-between items-center my-2">
+                            <span class="font-mono text-base font-bold text-slate-800" id="wishNumber">+961 81 322 059</span>
+                            <button onclick="copyWish()" class="text-emerald-600 hover:underline text-xs font-bold"><i class="fa-regular fa-copy"></i> نسخ</button>
+                        </div>
+                    </div>
+
+                    <div id="binanceDetails" class="hidden text-center">
+                        <p class="font-bold text-slate-800 mb-2">امسح كود QR عبر تطبيق Binance للدفع:</p>
+                        <div class="bg-white p-2 border rounded-xl inline-block mb-2">
+                            <img src="https://i.ibb.co/LdQ8M72/1000216195.jpg" alt="Binance QR Code" class="w-40 h-40 object-contain mx-auto">
+                        </div>
+                        <p class="text-[11px] text-slate-500">تدعم العملات الرقمية (USDT / BUSD)</p>
+                    </div>
+
+                    <div>
+                        <label class="block font-bold text-slate-700 mb-1">رقم مرجع التحويل / Transaction ID *</label>
+                        <input type="text" id="txRef" placeholder="أدخل رقم الإشعار أو المرجع بعد التحويل" class="w-full bg-white border border-slate-300 rounded-lg p-2 text-xs">
+                    </div>
+                </div>
+
+                <div class="space-y-2">
+                    <input type="text" id="custName" placeholder="الاسم الكامل *" class="w-full border rounded-xl p-2.5 text-xs">
+                    <input type="tel" id="custPhone" placeholder="رقم الهاتف للتواصل والدليفري *" class="w-full border rounded-xl p-2.5 text-xs">
+                    <input type="text" id="custAddress" placeholder="العنوان بالتفصيل *" class="w-full border rounded-xl p-2.5 text-xs">
+                </div>
+
+                <div class="flex justify-between items-center font-extrabold text-base border-t pt-3 mt-4">
+                    <span>الإجمالي:</span>
+                    <span id="cartTotal" class="text-emerald-600">$0.00</span>
+                </div>
+
+                <button onclick="submitOrder()" class="w-full mt-4 bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 rounded-xl shadow-lg transition">
+                    تأكيد الطلب وإرسال الملاحظة
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-slate-400 py-8 px-4 border-t border-slate-800 mt-auto">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4 text-center md:text-right">
+            <div>
+                <span class="text-xl font-bold text-white">MADN Marketplace</span>
+                <p class="text-xs text-slate-500 mt-1">المنصة الوسيطة بين البائع والمشتري - خدمة مستمرة 24/24</p>
+            </div>
+            <div class="text-xs text-slate-500">
+                جميع الحقوق محفوظة &copy; 2026 MADN Platform
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript Logic -->
+    <script>
+        let products = [
+            { id: 1, title: 'ساعة ذكية مقاومة للماء Smart Watch', price: 35.00, category: 'electronics', vendor: 'متجر التكنولوجيا', phone: '+96181322059', img: 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=500' },
+            { id: 2, title: 'سماعات بلوتوث لاسلكية Pro', price: 22.00, category: 'electronics', vendor: 'عالم الهواتف', phone: '+96181322059', img: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500' },
+            { id: 3, title: 'عطر رجالي فاخر 100ml', price: 45.00, category: 'perfumes', vendor: 'العطور الملكية', phone: '+96181322059', img: 'https://images.unsplash.com/photo-1523293182086-7651a899d37f?w=500' },
+            { id: 4, title: 'حقيبة ظهر جلدية للأعمال', price: 28.00, category: 'fashion', vendor: 'بوتيك الأناقة', phone: '+96181322059', img: 'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=500' },
+            { id: 5, title: 'مصباح طاولة عصري LED', price: 18.50, category: 'home', vendor: 'ديكور المنزل', phone: '+96181322059', img: 'https://images.unsplash.com/photo-1507473885765-e6ed057f782c?w=500' },
+            { id: 6, title: 'نظارات شمسية كلاسيكية', price: 15.00, category: 'fashion', vendor: 'نظارات العصر', phone: '+96181322059', img: 'https://images.unsplash.com/photo-1511499767150-a48a237f0083?w=500' }
+        ];
+
+        let cart = [];
+        let selectedCategory = 'all';
+        let currentPayment = '';
+
+        function renderProducts(list = products) {
+            const grid = document.getElementById('productsGrid');
+            if(!grid) return;
+            grid.innerHTML = '';
+            
+            if(list.length === 0) {
+                grid.innerHTML = `<div class="col-span-full text-center py-12 text-slate-400">لا توجد منتجات مطابقة لجميع معايير البحث</div>`;
+                return;
+            }
+
+            list.forEach(p => {
+                grid.innerHTML += `
+                    <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-md transition flex flex-col">
+                        <div class="h-40 bg-slate-100 overflow-hidden relative">
+                            <img src="${p.img}" alt="${p.title}" class="w-full h-full object-cover hover:scale-105 transition duration-300">
+                            <span class="absolute top-2 right-2 bg-slate-900/70 text-white text-[10px] px-2 py-0.5 rounded-full backdrop-blur-sm">${p.vendor}</span>
+                        </div>
+                        <div class="p-3 flex-1 flex flex-col justify-between">
+                            <div>
+                                <h3 class="font-bold text-xs sm:text-sm text-slate-800 line-clamp-2 mb-1">${p.title}</h3>
+                                <p class="text-emerald-600 font-extrabold text-sm sm:text-base mb-2">$${p.price.toFixed(2)}</p>
+                            </div>
+                            <button onclick="addToCart(${p.id})" class="w-full bg-slate-100 hover:bg-emerald-600 hover:text-white text-slate-700 font-bold py-2 rounded-xl text-xs flex items-center justify-center gap-1.5 transition">
+                                <i class="fa-solid fa-cart-plus"></i> إضافة للسلة
+                            </button>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        function filterCategory(e, cat) {
+            selectedCategory = cat;
+            document.querySelectorAll('.cat-btn').forEach(btn => {
+                btn.classList.remove('bg-emerald-600', 'text-white');
+                btn.classList.add('bg-white', 'text-slate-700');
+            });
+            if(e && e.target) {
+                e.target.classList.remove('bg-white', 'text-slate-700');
+                e.target.classList.add('bg-emerald-600', 'text-white');
+            }
+            applyFilters();
+        }
+
+        function applyFilters() {
+            const query1 = (document.getElementById('searchInput')?.value || '').toLowerCase();
+            const query2 = (document.getElementById('mobileSearchInput')?.value || '').toLowerCase();
+            const query = query1 || query2;
+
+            let filtered = products.filter(p => {
+                const matchCat = selectedCategory === 'all' || p.category === selectedCategory;
+                const matchQuery = p.title.toLowerCase().includes(query) || p.vendor.toLowerCase().includes(query);
+                return matchCat && matchQuery;
+            });
+            renderProducts(filtered);
+        }
+
+        function openVendorModal() { document.getElementById('vendorModal').classList.remove('hidden'); }
+        function closeVendorModal() { document.getElementById('vendorModal').classList.add('hidden'); }
+
+        function handleVendorSubmit(e) {
+            e.preventDefault();
+            const newP = {
+                id: Date.now(),
+                title: document.getElementById('vTitle').value,
+                price: parseFloat(document.getElementById('vPrice').value),
+                category: document.getElementById('vCategory').value,
+                vendor: document.getElementById('vStoreName').value,
+                phone: document.getElementById('vPhone').value,
+                img: document.getElementById('vImg').value || 'https://images.unsplash.com/photo-1560343090-f0409e92791a?w=500'
+            };
+            products.unshift(newP);
+            applyFilters();
+            closeVendorModal();
+            alert('تم نشر منتجك بنجاح على منصة MADN!');
+            document.getElementById('vendorForm').reset();
+        }
+
+        function addToCart(id) {
+            const prod = products.find(p => p.id === id);
+            if(prod) {
+                cart.push(prod);
+                updateCartBadge();
+                alert('تمت إضافة المنتج للسلة!');
+            }
+        }
+
+        function updateCartBadge() {
+            const badge = document.getElementById('cartBadge');
+            if(!badge) return;
+            badge.innerText = cart.length;
+            if(cart.length > 0) badge.classList.remove('hidden');
+            else badge.classList.add('hidden');
+        }
+
+        function toggleCartModal() {
+            const modal = document.getElementById('cartModal');
+            if(modal) {
+                modal.classList.toggle('hidden');
+                renderCartItems();
+            }
+        }
+
+        function renderCartItems() {
+            const container = document.getElementById('cartItemsContainer');
+            const checkout = document.getElementById('checkoutForm');
+            if(!container || !checkout) return;
+            container.innerHTML = '';
+
+            if(cart.length === 0) {
+                container.innerHTML = `<p class="text-center text-slate-400 text-sm py-6">السلة فارغة حالياً</p>`;
+                checkout.classList.add('hidden');
+                return;
+            }
+
+            checkout.classList.remove('hidden');
+            let total = 0;
+            cart.forEach((item, index) => {
+                total += item.price;
+                container.innerHTML += `
+                    <div class="flex justify-between items-center bg-slate-50 p-2.5 rounded-xl border text-xs">
+                        <div class="flex items-center gap-2">
+                            <img src="${item.img}" class="w-10 h-10 object-cover rounded-lg">
+                            <div>
+                                <p class="font-bold text-slate-800">${item.title}</p>
+                                <p class="text-slate-500">$${item.price.toFixed(2)}</p>
+                            </div>
+                        </div>
+                        <button onclick="removeFromCart(${index})" class="text-red-500 hover:text-red-700"><i class="fa-solid fa-trash"></i></button>
+                    </div>
+                `;
+            });
+
+            document.getElementById('cartTotal').innerText = `$${total.toFixed(2)}`;
+        }
+
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            updateCartBadge();
+            renderCartItems();
+        }
+
+        function selectPayment(type) {
+            currentPayment = type;
+            document.getElementById('btnWish').classList.remove('border-wish', 'bg-blue-50');
+            document.getElementById('btnBinance').classList.remove('border-binance', 'bg-yellow-50');
+            document.getElementById('wishDetails').classList.add('hidden');
+            document.getElementById('binanceDetails').classList.add('hidden');
+
+            document.getElementById('paymentDetails').classList.remove('hidden');
+
+            if(type === 'wish') {
+                document.getElementById('btnWish').classList.add('border-wish', 'bg-blue-50');
+                document.getElementById('wishDetails').classList.remove('hidden');
+            } else {
+                document.getElementById('btnBinance').classList.add('border-binance', 'bg-yellow-50');
+                document.getElementById('binanceDetails').classList.remove('hidden');
+            }
+        }
+
+        function copyWish() {
+            navigator.clipboard.writeText('+96181322059');
+            alert('تم نسخ رقم Wish Money!');
+        }
+
+        function submitOrder() {
+            const name = document.getElementById('custName').value;
+            const phone = document.getElementById('custPhone').value;
+            const tx = document.getElementById('txRef').value;
+
+            if(!name || !phone || !tx || !currentPayment) {
+                alert('يرجى ملء جميع الحقول واختيار طريقة الدفع وإدخال رقم التحويل!');
+                return;
+            }
+
+            alert(`شكراً لك ${name}! تم تسجيل طلبك بنجاح وإرسال رقم التحويل (${tx}) للمراجعة. سيتواصل معك فريق MADN فوراً.`);
+            cart = [];
+            updateCartBadge();
+            toggleCartModal();
+        }
+
+        // Run on Page Load
+        document.addEventListener("DOMContentLoaded", function() {
+            renderProducts();
+        });
+    </script>
+</body>
+</html>
